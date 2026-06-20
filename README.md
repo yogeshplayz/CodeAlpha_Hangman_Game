@@ -42,7 +42,6 @@ python hangman.py
 ## Project Structure
 - `hangman.py` - Main game logic and implementation
 - `README.md` - Project documentation
-- `words.txt` - Word list for the game (if applicable)
 
 ## Learning Objectives
 This project demonstrates:
