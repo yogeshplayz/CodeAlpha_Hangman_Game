@@ -1,9 +1,11 @@
 import random
 
+# Word list for the game
+WORDS = ['python', 'coding', 'script','yogesh', 'logic', 'system', 'algorithm', 'function', 'variable', 'developer', 'debugging']
+
 def play_hangman():
-    # Setup: 5 predefined words and game limits
-    words = ['python', 'coding', 'script', 'logic', 'system']
-    word_to_guess = random.choice(words)
+    # Setup: word selection and game limits
+    word_to_guess = random.choice(WORDS)
     guessed_letters = []
     attempts_left = 6
 
@@ -23,11 +25,6 @@ def play_hangman():
         print(f"Attempts left: {attempts_left}")
         print(f"Guessed so far: {', '.join(guessed_letters)}")
 
-        # Check if the player has won
-        if "_" not in display_word:
-            print("Congratulations! You won!")
-            break
-
         # Get player input
         guess = input("Guess a letter: ").lower()
 
@@ -39,6 +36,12 @@ def play_hangman():
         elif guess in word_to_guess:
             print(f"Good job! '{guess}' is in the word.")
             guessed_letters.append(guess)
+            
+            # Check if the player has won
+            if all(letter in guessed_letters for letter in word_to_guess):
+                print(f"\nWord: {word_to_guess}")
+                print("Congratulations! You won!")
+                break
         else:
             print(f"Sorry, '{guess}' is not there.")
             guessed_letters.append(guess)
@@ -48,5 +51,14 @@ def play_hangman():
     if attempts_left == 0:
         print(f"\nGame Over! The word was: {word_to_guess}")
 
+def main():
+    """Main function to handle game loop and replay functionality"""
+    while True:
+        play_hangman()
+        replay = input("\nPlay again? (y/n): ").lower()
+        if replay != 'y':
+            print("Thanks for playing Hangman! Goodbye!")
+            break
+
 if __name__ == "__main__":
-    play_hangman()
+    main()
